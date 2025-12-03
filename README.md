@@ -99,13 +99,13 @@ escuelaChuckyAlan_Luis/
 
 ## Funcionalidades
 
-- ✅ Registro e inicio de sesión de usuarios
-- ✅ Gestión de cursos (CRUD)
-- ✅ Gestión de alumnos (CRUD)
-- ✅ Dashboard administrativo con estadísticas
-- ✅ Relación alumno-curso
-- ✅ Control de acceso basado en roles
-- ✅ Interfaz responsive con Bootstrap 5
+- Registro e inicio de sesión de usuarios
+- Gestión de cursos (CRUD)
+- Gestión de alumnos (CRUD)
+- Dashboard administrativo con estadísticas
+- Relación alumno-curso
+- Control de acceso basado en roles
+- Interfaz responsive con Bootstrap 5
 
 ## Tecnologías Utilizadas
 
@@ -114,16 +114,3 @@ escuelaChuckyAlan_Luis/
 - **Frontend:** Bootstrap 5.3.7
 - **Templates:** Landify & Flexy
 - **Icons:** Bootstrap Icons
-
-## Soporte
-
-Si tienes problemas con la instalación o ejecución del proyecto, verifica:
-
-1. Que MySQL esté ejecutándose
-2. Que las credenciales de la base de datos sean correctas
-3. Que todas las dependencias estén instaladas
-4. Que hayas aplicado las migraciones
-
-## Licencia
-
-Este proyecto fue desarrollado con fines educativos.
