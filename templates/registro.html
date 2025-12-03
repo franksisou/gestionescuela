@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro - Escuela Chucky PB</title>
+  {% load static %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/img/favicon.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/flexy-styles.min.css' %}" />
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #012970 0%, #4154f1 100%);
+    }
+    
+    .card {
+      border: none;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-primary {
+      background-color: #4154f1;
+      border-color: #4154f1;
+      padding: 12px;
+      font-weight: 600;
+    }
+    
+    .btn-primary:hover {
+      background-color: #3346d4;
+      border-color: #3346d4;
+    }
+    
+    .logo-section {
+      background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 10px 10px 0 0;
+    }
+    
+    .form-control:focus {
+      border-color: #4154f1;
+      box-shadow: 0 0 0 0.2rem rgba(65, 84, 241, 0.25);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center py-4">
+    <div class="d-flex align-items-center justify-content-center w-100">
+      <div class="row justify-content-center w-100">
+        <div class="col-md-10 col-lg-8 col-xxl-6">
+          <div class="card mb-0">
+            <div class="logo-section text-center">
+              <div class="mb-3">
+                <i class="bi bi-person-plus-fill" style="font-size: 3rem;"></i>
+              </div>
+              <h2 class="fw-bold mb-2">Crear Cuenta Nueva</h2>
+              <p class="mb-0 opacity-75">Completa el formulario para registrarte</p>
+            </div>
+            <div class="card-body p-4">
+              <form method="POST">
+                {% csrf_token %}
+                
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                      <i class="bi bi-person me-2"></i>Nombre de Usuario
+                    </label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                      <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                      <i class="bi bi-envelope me-2"></i>Correo Electrónico
+                    </label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                      <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                      <i class="bi bi-person-badge me-2"></i>Nombre
+                    </label>
+                    {{ form.first_name }}
+                    {% if form.first_name.errors %}
+                      <div class="text-danger small mt-1">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                      <i class="bi bi-person-badge me-2"></i>Apellido
+                    </label>
+                    {{ form.last_name }}
+                    {% if form.last_name.errors %}
+                      <div class="text-danger small mt-1">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                      <i class="bi bi-lock me-2"></i>Contraseña
+                    </label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                      <div class="text-danger small mt-1">{{ form.password1.errors }}</div>
+                    {% endif %}
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                      <i class="bi bi-lock-fill me-2"></i>Confirmar Contraseña
+                    </label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                      <div class="text-danger small mt-1">{{ form.password2.errors }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <!-- Campo rol oculto -->
+                <div style="display: none;">
+                  {{ form.rol }}
+                </div>
+
+                {% if form.non_field_errors %}
+                  <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
+                  <i class="bi bi-person-check me-2"></i>Crear Cuenta
+                </button>
+                
+                <div class="d-flex align-items-center justify-content-between">
+                  <a href="{% url 'landing' %}" class="text-primary">
+                    <i class="bi bi-arrow-left me-1"></i>Volver al Inicio
+                  </a>
+                  <a class="text-primary fw-bold" href="{% url 'login' %}">¿Ya tienes cuenta? Inicia sesión</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+
+</html>

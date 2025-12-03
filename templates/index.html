@@ -1,0 +1,149 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- Breadcrumb -->
+<div class="card bg-primary text-white mb-4">
+  <div class="card-body py-4">
+    <h4 class="mb-0"><i class="bi bi-speedometer2 me-2"></i>Panel de Control</h4>
+    <p class="mb-0 opacity-75">Bienvenido, <strong>{{ user.username }}</strong></p>
+  </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row">
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="stat-card">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+          <h6 class="mb-1 opacity-75">Total Cursos</h6>
+          <h2 class="mb-0 fw-bold">{{ total_cursos }}</h2>
+        </div>
+        <div class="rounded-circle bg-white bg-opacity-25 p-3">
+          <i class="bi bi-journal-text fs-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="stat-card success">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+          <h6 class="mb-1 opacity-75">Total Alumnos</h6>
+          <h2 class="mb-0 fw-bold">{{ total_alumnos }}</h2>
+        </div>
+        <div class="rounded-circle bg-white bg-opacity-25 p-3">
+          <i class="bi bi-people fs-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 col-md-6 mb-4">
+    <div class="stat-card info">
+      <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+          <h6 class="mb-1 opacity-75">Mis Alumnos</h6>
+          <h2 class="mb-0 fw-bold">{{ mis_alumnos }}</h2>
+        </div>
+        <div class="rounded-circle bg-white bg-opacity-25 p-3">
+          <i class="bi bi-person-check fs-2"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mb-4">
+  <div class="col-lg-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+            <i class="bi bi-people-fill text-primary fs-3"></i>
+          </div>
+          <h4 class="mb-0">Gestión de Alumnos</h4>
+        </div>
+        <p class="text-muted mb-4">Administra el registro, visualiza y edita la información de los estudiantes.</p>
+        <a href="{% url 'alumnos_list' %}" class="btn btn-primary">
+          <i class="bi bi-arrow-right-circle me-2"></i>Ver Alumnos
+        </a>
+      </div>
+    </div>
+  </div>
+
+  {% if user.is_superuser %}
+  <div class="col-lg-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+            <i class="bi bi-journal-text text-success fs-3"></i>
+          </div>
+          <h4 class="mb-0">Gestión de Cursos</h4>
+        </div>
+        <p class="text-muted mb-4">Crea, modifica y administra la oferta académica completa de la institución.</p>
+        <a href="{% url 'cursos_list' %}" class="btn btn-success">
+          <i class="bi bi-arrow-right-circle me-2"></i>Ver Cursos
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<!-- Top Cursos -->
+{% if cursos_data %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-transparent py-3">
+        <h4 class="mb-0">
+          <i class="bi bi-trophy-fill text-warning me-2"></i>Top Cursos Más Populares
+        </h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th><i class="bi bi-hash me-2"></i>Posición</th>
+                <th><i class="bi bi-book me-2"></i>Curso</th>
+                <th class="text-end"><i class="bi bi-people me-2"></i>Estudiantes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in cursos_data %}
+              <tr>
+                <td>
+                  <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
+                    <span class="fw-bold text-primary">{{ forloop.counter }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-journal-text text-primary me-3 fs-4"></i>
+                    <span class="fw-semibold">{{ item.curso }}</span>
+                  </div>
+                </td>
+                <td class="text-end">
+                  <span class="badge bg-primary rounded-pill px-3 py-2">
+                    {{ item.cantidad }} <i class="bi bi-people-fill ms-1"></i>
+                  </span>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}
+

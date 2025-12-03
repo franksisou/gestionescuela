@@ -1,0 +1,150 @@
+{% extends 'base_admin.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="card bg-primary text-white mb-4">
+  <div class="card-body py-3 d-flex justify-content-between align-items-center">
+    <div>
+      <h4 class="mb-0"><i class="bi bi-people me-2"></i>Gestión de Alumnos</h4>
+    </div>
+    <a href="{% url 'alumno_create' %}" class="btn btn-light">
+      <i class="bi bi-plus-circle me-2"></i>Registrar Nuevo Alumno
+    </a>
+  </div>
+</div>
+
+<!-- Estadísticas -->
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted mb-2">Total Alumnos</h6>
+        <h3 class="fw-bold text-primary">{{ total_alumnos }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted mb-2">Cursos Activos</h6>
+        <h3 class="fw-bold text-success">{{ cursos_activos }}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted mb-2">Promedio por Curso</h6>
+        <h3 class="fw-bold text-info">{% if cursos_activos > 0 %}{% widthratio total_alumnos cursos_activos 1 %}{% else %}0{% endif %}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Distribución por Curso -->
+{% if alumnos_por_curso %}
+<div class="row mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-transparent">
+        <h5 class="mb-0"><i class="bi bi-bar-chart-fill me-2"></i>Distribución por Curso</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          {% for curso, cantidad in alumnos_por_curso.items %}
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="text-center p-3 bg-light rounded">
+              <h6 class="fw-bold">{{ curso }}</h6>
+              <div class="badge bg-primary fs-5 px-3 py-2">{{ cantidad }}</div>
+              <p class="text-muted mb-0 mt-2 small">estudiante{{ cantidad|pluralize }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Tabla de Alumnos -->
+{% if alumnos %}
+<div class="card">
+  <div class="card-header bg-transparent">
+    <h5 class="mb-0"><i class="bi bi-table me-2"></i>Lista de Alumnos</h5>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id="tablaAlumnos" class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th>RUT</th>
+            <th>Nombre Completo</th>
+            <th>Fecha Nacimiento</th>
+            <th>Curso</th>
+            <th>Creador</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for alumno in alumnos %}
+          <tr>
+            <td><strong>{{ alumno.rut }}</strong></td>
+            <td>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-person-circle me-2 text-primary fs-4"></i>
+                <span>{{ alumno.nombre }} {{ alumno.apellido }}</span>
+              </div>
+            </td>
+            <td>{{ alumno.fecha_nacimiento|date:"d/m/Y" }}</td>
+            <td>
+              <span class="badge bg-info text-dark">{{ alumno.curso.nombre }}</span>
+            </td>
+            <td>{{ alumno.creador.username }}</td>
+            <td>
+              <a href="{% url 'alumno_update' alumno.id %}" class="btn btn-warning btn-sm me-1">
+                <i class="bi bi-pencil"></i> Editar
+              </a>
+              {% if user.is_superuser %}
+              <a href="{% url 'alumno_delete' alumno.id %}" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i> Eliminar
+              </a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- DataTables CSS y JS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#tablaAlumnos').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json"
+        },
+        "pageLength": 10,
+        "order": [[0, 'asc']]
+    });
+});
+</script>
+{% else %}
+<div class="card">
+  <div class="card-body text-center py-5">
+    <i class="bi bi-inbox fs-1 text-muted mb-3 d-block"></i>
+    <h5 class="text-muted">Sin alumnos registrados</h5>
+    <p class="text-muted">No hay alumnos registrados. Comienza registrando tu primer alumno.</p>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

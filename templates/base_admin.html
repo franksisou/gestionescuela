@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Panel de Administración - Escuela Chucky PB{% endblock %}</title>
+  
+  {% load static %}
+  
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/img/favicon.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/flexy-styles.min.css' %}" />
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  
+  <style>
+    /* Personalización de colores para coincidir con Landify */
+    :root {
+      --primary-color: #4154f1;
+      --secondary-color: #012970;
+      --accent-color: #8c3849;
+      --success-color: #198754;
+      --danger-color: #dc3545;
+      --warning-color: #ffc107;
+      --info-color: #0dcaf0;
+      --dark-color: #012970;
+      --light-color: #f8f9fa;
+    }
+    
+    /* Sidebar */
+    .left-sidebar {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    }
+    
+    .sidebar-nav .sidebar-item .sidebar-link {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .sidebar-nav .sidebar-item .sidebar-link:hover,
+    .sidebar-nav .sidebar-item.selected > .sidebar-link {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    
+    .brand-logo {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .brand-logo img {
+      filter: brightness(0) invert(1);
+    }
+    
+    /* Header */
+    .app-header {
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      margin: 0 !important;
+      padding: 0 !important;
+      top: 0 !important;
+    }
+    
+    /* Botones primarios */
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+      background-color: #3346d4;
+      border-color: #3346d4;
+    }
+    
+    /* Cards */
+    .card {
+      border: none;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+    }
+    
+    .card-header {
+      background-color: transparent;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Estadísticas */
+    .stat-card {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #5969f3 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(65, 84, 241, 0.3);
+    }
+    
+    .stat-card.success {
+      background: linear-gradient(135deg, var(--success-color) 0%, #20c997 100%);
+      box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3);
+    }
+    
+    .stat-card.warning {
+      background: linear-gradient(135deg, var(--warning-color) 0%, #ffcd39 100%);
+      box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    }
+    
+    .stat-card.info {
+      background: linear-gradient(135deg, var(--info-color) 0%, #31d2f2 100%);
+      box-shadow: 0 4px 15px rgba(13, 202, 240, 0.3);
+    }
+    
+    /* Tablas */
+    .table thead {
+      background-color: #f8f9fa;
+    }
+    
+    .table tbody tr:hover {
+      background-color: rgba(65, 84, 241, 0.05);
+    }
+    
+    /* Navegación activa */
+    .nav-small-cap {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1rem 1rem 0.5rem;
+    }
+    
+    /* Iconos */
+    .sidebar-link i {
+      width: 20px;
+      text-align: center;
+    }
+    
+    /* Body wrapper */
+    .body-wrapper {
+      background-color: #f6f9ff;
+      margin-top: 0 !important;
+      padding-top: 70px !important;
+    }
+    
+    .body-wrapper-inner {
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+    }
+    
+    /* Header ajustes */
+    .app-header {
+      height: 70px;
+      min-height: 70px;
+      position: fixed !important;
+      top: 0 !important;
+      left: 270px !important;
+      right: 0 !important;
+      z-index: 1000;
+      margin: 0 !important;
+    }
+    
+    .container-fluid {
+      padding-top: 1.5rem;
+    }
+    
+    /* Page wrapper */
+    .page-wrapper {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="{% url 'Inicio' %}" class="text-nowrap logo-img d-flex align-items-center text-white text-decoration-none">
+            <i class="bi bi-mortarboard-fill fs-3 me-2"></i>
+            <span class="fw-bold">Escuela Chucky PB</span>
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="bi bi-x fs-4 text-white"></i>
+          </div>
+        </div>
+        
+        <!-- Sidebar navigation -->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">
+              <i class="bi bi-three-dots"></i>
+              <span class="hide-menu">Principal</span>
+            </li>
+            
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{% url 'Inicio' %}" aria-expanded="false">
+                <span>
+                  <i class="bi bi-speedometer2"></i>
+                </span>
+                <span class="hide-menu">Dashboard</span>
+              </a>
+            </li>
+            
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{% url 'alumnos_list' %}" aria-expanded="false">
+                <span>
+                  <i class="bi bi-people"></i>
+                </span>
+                <span class="hide-menu">Alumnos</span>
+              </a>
+            </li>
+            
+            {% if user.is_superuser %}
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{% url 'cursos_list' %}" aria-expanded="false">
+                <span>
+                  <i class="bi bi-journal-text"></i>
+                </span>
+                <span class="hide-menu">Cursos</span>
+              </a>
+            </li>
+            {% endif %}
+            
+            <li class="nav-small-cap">
+              <i class="bi bi-three-dots"></i>
+              <span class="hide-menu">Cuenta</span>
+            </li>
+            
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{% url 'logout' %}" aria-expanded="false">
+                <span>
+                  <i class="bi bi-box-arrow-right"></i>
+                </span>
+                <span class="hide-menu">Cerrar Sesión</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+    </aside>
+    <!-- Sidebar End -->
+    
+    <!-- Main wrapper -->
+    <div class="body-wrapper">
+      <!-- Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                <i class="bi bi-list fs-4"></i>
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class="bi bi-person-circle fs-4"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="bi bi-person fs-5"></i>
+                      <p class="mb-0 fs-3">{{ user.username }}</p>
+                    </a>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-primary mx-3 mt-2 d-block">Cerrar Sesión</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Header End -->
+      
+      <div class="body-wrapper-inner">
+        <div class="container-fluid">
+          <!-- Mensajes -->
+          {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              <i class="bi bi-info-circle-fill me-2"></i>{{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+          {% endif %}
+          
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/sidebarmenu.js' %}"></script>
+  <script src="{% static 'assets/js/app.min.js' %}"></script>
+  <script src="{% static 'assets/libs/simplebar/dist/simplebar.js' %}"></script>
+</body>
+
+</html>

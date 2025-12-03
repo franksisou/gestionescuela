@@ -1,0 +1,183 @@
+{% extends 'base_landing.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+          <div class="company-badge mb-4">
+            <i class="bi bi-mortarboard-fill me-2"></i> INSTITUCIÓN EDUCATIVA
+          </div>
+
+          <h1 class="mb-4">
+            Bienvenido a<br>
+            <span class="accent-text">Escuela Chucky PB</span>
+          </h1>
+
+          <p class="mb-4 mb-md-5">
+            Sistema integral de gestión educativa que facilita la administración de cursos, 
+            estudiantes y recursos académicos. Innovación y excelencia al servicio de la educación.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-0 me-sm-2 mx-1">Iniciar Sesión</a>
+            <a href="{% url 'registro' %}" class="btn btn-outline-primary btn-lg mx-1">
+              <i class="bi bi-person-plus"></i> Registrarse
+            </a>
+          </div>
+
+          <div class="customer-logos mt-5">
+            <p class="text-muted mb-3">Confianza y Calidad Educativa</p>
+            <div class="d-flex gap-4 flex-wrap">
+              <div class="stat-item">
+                <h4 class="mb-0">500+</h4>
+                <p class="text-muted mb-0">Estudiantes</p>
+              </div>
+              <div class="stat-item">
+                <h4 class="mb-0">50+</h4>
+                <p class="text-muted mb-0">Docentes</p>
+              </div>
+              <div class="stat-item">
+                <h4 class="mb-0">30+</h4>
+                <p class="text-muted mb-0">Cursos</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+          <img src="{% static 'assets/img/illustration/illustration-15.webp' %}" alt="Hero Image" class="img-fluid">
+        </div>
+      </div>
+    </div>
+
+    <div class="row stats-row gy-4 mt-5" data-aos="fade-up" data-aos-delay="500">
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item text-center">
+          <div class="stat-icon">
+            <i class="bi bi-trophy"></i>
+          </div>
+          <div class="stat-number" data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="1">98</div>
+          <p>% Satisfacción</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item text-center">
+          <div class="stat-icon">
+            <i class="bi bi-journal-text"></i>
+          </div>
+          <div class="stat-number" data-purecounter-start="0" data-purecounter-end="30" data-purecounter-duration="1">30</div>
+          <p>Cursos Disponibles</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item text-center">
+          <div class="stat-icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="stat-number" data-purecounter-start="0" data-purecounter-end="500" data-purecounter-duration="1">500</div>
+          <p>Estudiantes Activos</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item text-center">
+          <div class="stat-icon">
+            <i class="bi bi-award"></i>
+          </div>
+          <div class="stat-number" data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1">15</div>
+          <p>Años de Experiencia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Hero Section -->
+
+<!-- About Section -->
+<section id="about" class="about section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-5">
+      <div class="col-lg-6 order-2 order-lg-1 content">
+        <h3>Acerca de Escuela Chucky PB</h3>
+        <p>
+          Somos una institución educativa comprometida con la excelencia académica y el desarrollo integral 
+          de nuestros estudiantes. Nuestro sistema de gestión facilita la administración educativa y mejora 
+          la experiencia de aprendizaje.
+        </p>
+        <ul>
+          <li>
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <h5>Gestión Integral</h5>
+              <p>Sistema completo para administrar cursos, estudiantes y recursos académicos de manera eficiente.</p>
+            </div>
+          </li>
+          <li>
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <h5>Seguimiento Personalizado</h5>
+              <p>Herramientas avanzadas para el seguimiento del progreso académico de cada estudiante.</p>
+            </div>
+          </li>
+          <li>
+            <i class="bi bi-check-circle-fill"></i>
+            <div>
+              <h5>Comunicación Efectiva</h5>
+              <p>Plataforma integrada que facilita la comunicación entre docentes, estudiantes y padres.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="zoom-out" data-aos-delay="200">
+        <img src="{% static 'assets/img/about/about-5.webp' %}" class="img-fluid" alt="About">
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="feature-box">
+          <i class="bi bi-laptop"></i>
+          <h4>Plataforma Moderna</h4>
+          <p>Interfaz intuitiva y fácil de usar, accesible desde cualquier dispositivo.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="feature-box">
+          <i class="bi bi-shield-check"></i>
+          <h4>Seguridad Garantizada</h4>
+          <p>Protección de datos y privacidad con los más altos estándares de seguridad.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+        <div class="feature-box">
+          <i class="bi bi-graph-up-arrow"></i>
+          <h4>Reportes en Tiempo Real</h4>
+          <p>Análisis y estadísticas actualizadas para una mejor toma de decisiones.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+        <div class="feature-box">
+          <i class="bi bi-headset"></i>
+          <h4>Soporte 24/7</h4>
+          <p>Asistencia técnica disponible para resolver cualquier inquietud.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /About Section -->
+
+{% endblock %}
